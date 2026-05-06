@@ -17,5 +17,5 @@ if uploaded_file:
     col2.metric("Total stop hours",f"{stop_time:.1f} hrs")
     fig=px.pie(df, names='Status', values='Duration', title='Run time vs stop time')
     st.plotly_chart(fig, use_container_width=True)
-  else:
+else:
       st.info("Please upload a csv with columns: Machine, Status, Duration")  

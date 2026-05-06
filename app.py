@@ -25,7 +25,14 @@ if upload_file:
     summary['Downtime %']=(summary.get('Stop',0)/summary['Total Hours'])*100
     summary=summary.round(2)
     st.dataframe(summary)
-    st.subheader(f"Graph: { worst_machine}-highest problem")
+    st.header("Higest Downtime Alert")
+    worst_machine=summary['Downtime %'].idxmax()
+    worst_downtime=summary['Downtime %'].max()
+    worst_stop_hrs=summary.loc[worst_machine].get('Stop',0)
+    col1.metric("Worst Machine", f"{worst_machine}")
+    col2.metric("Highest downtime %",f"{worst_downtime:.2f}%",delta="Critical",delta_color="inverse")
+    col3.metric("Stop Hours", f"{worst_stop_hrs:.1f} hrs")
+    st.subheader(f"Graph: {worst_machine}-highest problem")
     worst_df=df[df['Machine']==worst_machine]
     fig_worst=px.pie(worst_df,names='Status',values='Duration',
                      title=f'{worst_machine} Run vs Stop Breakdown',

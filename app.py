@@ -23,6 +23,21 @@ if upload_file:
     summary=df.groupby(['Machine','Status'])['Duration'].sum().unstack().fillna(0)
     summary['Total Hours']=summary.sum(axis=1)
     summary['Downtime %']=(summary.get('Stop',0)/summary['Total Hours'])*100
+    summary=summary.round(2)
     st.dataframe(summary)
+    st.subheader(f"Graph: {most worst_machine}-highest problem")
+    worst_df=df[df['Machine']==worst_machine]
+    fig_worst=px.pie(worst_df,names='Status',values='Duration',
+                     title=f'{worst_machine} Run vs Stop Breakdown',
+                     color='Status',color_discrete_map={'Run':'green','Stop':'red'}}
+    st.plotly_chart(fig_worst,use_container_width=True)
+    st.header("All Machines Downtime Comparison")
+    fig_bar=px.bar(summary.reset_index(),x='Machine',y='Downtime %',
+                   title='Machine Wise Downtime %',
+                   color='Downtime %', color_continuous_scale='Reds',
+                   text='Downtime %')
+    fig_bar.update_traces(texttemplate='%{text:.1f}%',textposition='outside')
+    st.plotly_chart(fig_bar,use_container_width=True)
+
 else:
       st.info("Please upload a csv with columns: Machine, Status, Duration")  

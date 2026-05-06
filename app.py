@@ -29,7 +29,7 @@ if upload_file:
     worst_df=df[df['Machine']==worst_machine]
     fig_worst=px.pie(worst_df,names='Status',values='Duration',
                      title=f'{worst_machine} Run vs Stop Breakdown',
-                     color='Status',color_discrete_map={'Run':'green','Stop':'red'}}
+                     color='Status',color_discrete_map={'Run':'green','Stop':'red'})
     st.plotly_chart(fig_worst,use_container_width=True)
     st.header("All Machines Downtime Comparison")
     fig_bar=px.bar(summary.reset_index(),x='Machine',y='Downtime %',

@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 st.set_page_config(page_title="Machine Downtime dashboard",layout="wide")
 st.title("Machine Downtime % Analytics - By Ahmer Nadeem")
-upload_file=st.file_uuploader("Upload Machine Log CSV file", type="csv")
+upload_file=st.file_uploader("Upload Machine Log CSV file", type="csv")
 if uploaded_file:
 
     df= pd.read_csv(uploaded_file)

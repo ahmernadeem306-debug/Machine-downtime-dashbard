@@ -25,7 +25,7 @@ if upload_file:
     summary['Downtime %']=(summary.get('Stop',0)/summary['Total Hours'])*100
     summary=summary.round(2)
     st.dataframe(summary)
-    st.subheader(f"Graph: {most worst_machine}-highest problem")
+    st.subheader(f"Graph: { worst_machine}-highest problem")
     worst_df=df[df['Machine']==worst_machine]
     fig_worst=px.pie(worst_df,names='Status',values='Duration',
                      title=f'{worst_machine} Run vs Stop Breakdown',

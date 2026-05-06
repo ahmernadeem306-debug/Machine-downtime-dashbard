@@ -11,10 +11,12 @@ if upload_file:
     st.dataframe(df.head())
     stop_time=df[df['Status']=='Stop']['Duration'].sum()
     total_time=df['Duration'].sum()
-    downtime_perc=(stop_time/total_time)*100
-    col1,col2=st.columns(2)
+    run_time=df[df['Status']=='Run']['Duration'].sum()
+    downtime_perc=(stop_time/total_time)*100 if total_time>0
+    col1,col2=st.columns(3)
     col1.metric("Total Downtime %", f"{downtime_perc:.2f}%")
     col2.metric("Total stop hours",f"{stop_time:.1f} hrs")
+    col3.metric("Total Production Hours", f"{run_time:.1f} hrs")
     fig=px.pie(df, names='Status', values='Duration', title='Run time vs stop time')
     st.plotly_chart(fig, use_container_width=True)
 else:

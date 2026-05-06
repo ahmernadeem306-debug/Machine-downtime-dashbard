@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 st.set_page_config(page_title="Machine Downtime dashboard",layout="wide")
 st.title("Machine Downtime % Analytics - By Ahmer Nadeem")
-upload_file=st.file_uupload("Upload Machinne Log CSV file", type="csv")
+upload_file=st.file_uupload("Upload Machine Log CSV file", type="csv")
 if uploaded_file:
 
     df= pd.read_csv(uploaded_file)
@@ -17,5 +17,5 @@ if uploaded_file:
     col2.metric("Total stop hours",f"{stop_time:.1f} hrs")
     fig=px.pie(df, names='Status', values='Duration', title='Run time vs stop time')
     st.plotly_chart(fig, use_container_width=True)
- else:
+  else:
      st.info("Please upload a csv with columns: Machine, Status, Duration")  

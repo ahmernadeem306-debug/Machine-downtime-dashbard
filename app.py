@@ -18,4 +18,4 @@ if uploaded_file:
     fig=px.pie(df, names='Status', values='Duration', title='Run time vs stop time')
     st.plotly_chart(fig, use_container_width=True)
   else:
-     st.info("Please upload a csv with columns: Machine, Status, Duration")  
+      st.info("Please upload a csv with columns: Machine, Status, Duration")  
